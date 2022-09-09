@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# React Forms Lab
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+En este lab vamos a reforzar tanto la validación de formularios cómo la comunicación entre componentes padre <> hijo.
 
-## Available Scripts
 
-In the project directory, you can run:
+# Iteración 1
 
-### `npm start`
+En esta parte nos centraremos en el formulario de creación de eventos, un evento tiene la siguiente información:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Nombre      | Tipo     | Descripción                 | Validaciones                                   |
+|-------------|----------|-----------------------------|------------------------------------------------|
+| title       | string   | Nombre del evento           | - Requerido                                    |
+| date        | string   | Fecha del evento (sin hora) | - Requerido - Fecha válida                     |
+| poster      | string   | Imágen del evento           | - Requerido - Opcional: que sea una URL válida |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Trabajaremos en el componente `./src/components/events/event-form.js`:
+  - useState (event, errros, touch)
+  - handleChange
+  - handleBlur
+  - handleSubmit
+  - isValid
+  - onCreatedEvent
 
-### `npm test`
+Una vez se hace submit del formulário tenemos que emitir un evento `onCreatedEvent` que envíe el evento al componente padre, deberá añadir un campo `id` al evento antes de enviarlo,
+usad la siguiente [librería](https://www.npmjs.com/package/uuid) para generar uuids.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+# Iteración 2
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Listaremos los eventos creados a partir del formulario, incilamente centraremos en conseguir que se vean simplemente los títulos de los eventos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Trabajaremos en los componentes :
+- `./src/components/events/event-form.js`: 
+  - onEventCreated
+- `./src/components/events/event-list.js`: 
+  - handleEventCreated
+  - useState
+- `./src/components/events/event-item.js`: 
+  - Simplemente renderizar el título del evento
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# Iteración 3
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Maquetación de la tarjeta del evento, podéis mirar en la demo como debe quedar, pero no inspeccionéis el HTML, perderá la gracia =D.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Iteración 4
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Añadir un botón de borrado de evento: `onDeletedEvent`
+- Añadir un botón de me gusta al evento (efecto toogle): `onLikedEvent`
